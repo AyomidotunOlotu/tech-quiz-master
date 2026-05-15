@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tech Quiz Master</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css"/>
+  <!-- Preload key assets -->
+  <link rel="preload" href="css/style.css" as="style">
+  <link rel="preload" href="js/app.js" as="script" crossorigin>
+
+<!-- Prevent flash of unstyled content -->
+<script>
+  const t = localStorage.getItem('theme');
+  if (t === 'light') document.documentElement.classList.add('light-early');
+</script>
+</head>
+<body>
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="logo-icon">⟨/⟩</div>
+      <div>
+        <h1 class="logo-title">Tech Quiz<br>Master</h1>
+        <p class="logo-sub">Level up your skills</p>
+      </div>
+      <!-- ADD THIS BUTTON -->
+       <button class="theme-toggle" id="themeToggle" title="Toggle theme">🌙</button>
+    </div>
+
+    <nav class="tech-list" id="techList">
+      <!-- Populated by JS -->
+    </nav>
+
+    <div class="sidebar-footer">
+      <span>Master your skills one quiz at a time.</span>
+      <strong>Keep Learning, Keep Growing!</strong>
+    </div>
+  </aside>
+
+  <!-- ── MAIN CONTENT ── -->
+  <main class="main" id="mainContent">
+
+    <!-- HOME VIEW -->
+    <section class="view" id="homeView">
+      <div class="home-card">
+        <div class="home-icon" id="homeIcon">{ }</div>
+        <h2 class="home-title" id="homeTechName">Select a Technology</h2>
+        <p class="home-desc" id="homeDesc">Choose a technology from the sidebar to begin your challenge</p>
+        <div class="difficulty-grid" id="difficultyGrid">
+          <!-- Populated dynamically -->
+        </div>
+        <p class="home-hint" id="homeHint">← Pick a topic to get started</p>
+      </div>
+    </section>
+
+    <!-- QUIZ VIEW -->
+    <section class="view hidden" id="quizView">
+      <div class="quiz-header">
+        <div class="quiz-meta">
+          <span class="quiz-tech-badge" id="quizTechBadge">HTML</span>
+          <span class="quiz-diff-badge" id="quizDiffBadge">Basic</span>
+        </div>
+        <div class="quiz-progress-wrap">
+          <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="progressFill"></div></div>
+          <span class="quiz-counter" id="quizCounter">1 / 20</span>
+        </div>
+        <div class="quiz-score-display">
+          <span>Score</span>
+          <strong id="liveScore">0</strong>
+        </div>
+      </div>
+
+      <div class="question-card" id="questionCard">
+        <p class="question-number" id="questionNumber">Question 1</p>
+        <h2 class="question-text" id="questionText">Loading question...</h2>
+        <div class="options-grid" id="optionsGrid">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <div class="quiz-controls">
+        <button class="btn btn-ghost" id="quitBtn">✕ Quit</button>
+        <button class="btn btn-primary hidden" id="nextBtn">Next →</button>
+      </div>
+    </section>
+
+    <!-- RESULTS VIEW -->
+    <section class="view hidden" id="resultsView">
+      <div class="results-card">
+        <div class="result-icon" id="resultIcon">🏆</div>
+        <h2 class="result-title" id="resultTitle">Quiz Complete!</h2>
+        <div class="result-score-ring">
+          <svg viewBox="0 0 120 120" class="ring-svg">
+            <circle cx="60" cy="60" r="50" class="ring-bg"/>
+            <circle cx="60" cy="60" r="50" class="ring-fill" id="ringFill"/>
+          </svg>
+          <div class="ring-label">
+            <span id="resultPercent">0%</span>
+            <small id="resultFraction">0/0</small>
+          </div>
+        </div>
+        <p class="result-message" id="resultMessage">Well done!</p>
+        <div class="result-stats">
+          <div class="stat-item"><span class="stat-num" id="statCorrect">0</span><span class="stat-label">Correct</span></div>
+          <div class="stat-item"><span class="stat-num" id="statWrong">0</span><span class="stat-label">Wrong</span></div>
+          <div class="stat-item"><span class="stat-num" id="statTime">0s</span><span class="stat-label">Time</span></div>
+        </div>
+        <div class="result-actions">
+          <button class="btn btn-ghost" id="retryBtn">↺ Retry</button>
+          <button class="btn btn-primary" id="homeBtn">⌂ Home</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── FIREBASE SDKs ── -->
+  <script type="module" src="js/firebase-config.js"></script>
+  <script type="module" src="js/questions.js"></script>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
