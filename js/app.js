@@ -242,6 +242,12 @@ function attachControls() {
   });
 
   $("homeBtn").addEventListener("click", () => showHomeDefault());
+  // Inside attachControls(), add:
+  $("backHomeBtn").addEventListener("click", () => window.showLandingPage());
+  $("ctaStartBtn") && $("ctaStartBtn").addEventListener("click", () => {
+    document.getElementById("appContainer").classList.remove("hidden");
+    document.getElementById("landingOverlay").classList.add("hidden");
+  });
 }
 
 // ── RESULTS ────────────────────────────────────────────────────────────────────
@@ -353,3 +359,7 @@ init();
     localStorage.setItem("theme", isLight ? "light" : "dark");
   });
 })();
+window.showLandingPage = function() {
+  document.getElementById("appContainer").classList.add("hidden");
+  document.getElementById("landingOverlay").classList.remove("hidden");
+};

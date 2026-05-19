@@ -7,57 +7,227 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css"/>
-  <!-- Preload key assets -->
-  <link rel="preload" href="css/style.css" as="style">
-  <link rel="preload" href="js/app.js" as="script" crossorigin>
-
-<!-- Prevent flash of unstyled content -->
-<script>
-  const t = localStorage.getItem('theme');
-  if (t === 'light') document.documentElement.classList.add('light-early');
-</script>
+  <link rel="stylesheet" href="css/auth.css"/>
+  <script>
+    const t = localStorage.getItem('theme');
+    if (t === 'light') document.documentElement.classList.add('light-early');
+  </script>
 </head>
 <body>
 
-  <!-- ── SIDEBAR ── -->
+  
+<!-- AUTH OVERLAY -->
+<div class="auth-overlay" id="authOverlay">
+
+  <!-- LOGIN FORM -->
+  <div class="auth-card" id="loginForm">
+    <div class="auth-logo">
+      <div class="auth-logo-icon">⟨/⟩</div>
+      <div class="auth-logo-text">
+        <h2>Tech Quiz Master</h2>
+        <p>Level up your skills</p>
+      </div>
+    </div>
+
+    <h1 class="auth-title">Welcome back 👋</h1>
+    <p class="auth-subtitle">Sign in to continue your learning journey</p>
+
+    <div class="auth-form">
+      <div class="auth-field">
+        <label class="auth-label">Email</label>
+        <input class="auth-input" type="email" id="loginEmail" placeholder="you@example.com"/>
+        <span class="auth-error" id="loginEmailError"></span>
+      </div>
+
+      <div class="auth-field">
+        <label class="auth-label">Password</label>
+        <input class="auth-input" type="password" id="loginPassword" placeholder="Your password"/>
+        <span class="auth-error" id="loginPasswordError"></span>
+      </div>
+
+      <button class="auth-btn" id="loginBtn">
+        <div class="btn-spinner"></div>
+        <span class="btn-text">Sign In →</span>
+      </button>
+
+      <p class="auth-switch">
+        Don't have an account?
+        <a href="#" id="showSignup">Create one</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- SIGNUP FORM -->
+  <div class="auth-card hidden" id="signupForm">
+
+    <div class="auth-logo">
+      <div class="auth-logo-icon">⟨/⟩</div>
+      <div class="auth-logo-text">
+        <h2>Tech Quiz Master</h2>
+        <p>Level up your skills</p>
+      </div>
+    </div>
+
+    <h1 class="auth-title">Create account 🚀</h1>
+    <p class="auth-subtitle">Join thousands of developers levelling up</p>
+
+    <div class="auth-form">
+
+      <div class="auth-field">
+        <label class="auth-label">Full Name</label>
+        <input class="auth-input" type="text" id="signupName" placeholder="Your name"/>
+        <span class="auth-error" id="signupNameError"></span>
+      </div>
+
+      <div class="auth-field">
+        <label class="auth-label">Email</label>
+        <input class="auth-input" type="email" id="signupEmail" placeholder="you@example.com"/>
+        <span class="auth-error" id="signupEmailError"></span>
+      </div>
+
+      <div class="auth-field">
+        <label class="auth-label">Password</label>
+        <input class="auth-input" type="password" id="signupPassword" placeholder="At least 6 characters"/>
+        <span class="auth-error" id="signupPasswordError"></span>
+      </div>
+
+      <div class="auth-field">
+        <label class="auth-label">Confirm Password</label>
+        <input class="auth-input" type="password" id="signupConfirm" placeholder="Repeat your password"/>
+        <span class="auth-error" id="signupConfirmError"></span>
+      </div>
+
+      <button class="auth-btn" id="signupBtn">
+        <div class="btn-spinner"></div>
+        <span class="btn-text">Create Account →</span>
+      </button>
+
+      <p class="auth-switch">
+        Already have an account?
+        <a href="#" id="showLogin">Sign in</a>
+      </p>
+
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- LANDING PAGE                                                       -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div class="landing-overlay hidden" id="landingOverlay">
+
+  <nav class="landing-nav">
+    <div class="landing-nav-logo">
+      <div class="nav-logo-icon">⟨/⟩</div>
+      <span class="nav-logo-text">Tech Quiz Master</span>
+    </div>
+    <div class="landing-nav-actions">
+      <div class="nav-user-info">
+        <div class="nav-avatar" id="navAvatar">U</div>
+        <span class="nav-username" id="navUsername">User</span>
+      </div>
+      <button class="btn-logout" id="logoutBtnLanding">Sign Out</button>
+      <button class="btn-start-quiz" id="startQuizBtn">Start Quiz →</button>
+    </div>
+  </nav>
+
+  <section class="landing-hero">
+    <div class="hero-badge">🎯 10 Technologies · 600+ Questions</div>
+    <h1 class="hero-title">Master <span>Tech Skills</span><br>One Quiz at a Time</h1>
+    <p class="hero-desc" id="landingUserName">
+      Test your knowledge across 10 technologies with Basic, Intermediate, and Advanced challenges.
+    </p>
+    <div class="hero-actions">
+      <button class="btn-hero-primary" id="heroStartBtn">🚀 Start Quizzing</button>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-num">10</div><div class="hero-stat-label">Technologies</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">600+</div><div class="hero-stat-label">Questions</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">3</div><div class="hero-stat-label">Difficulty Levels</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">∞</div><div class="hero-stat-label">Attempts</div></div>
+    </div>
+  </section>
+
+  <section class="landing-features">
+    <h2 class="features-title">Everything you need to level up</h2>
+    <div class="features-grid">
+      <div class="feature-card"><div class="feature-icon">⚡</div><div class="feature-title">Instant Feedback</div><div class="feature-desc">See correct answers immediately after each question.</div></div>
+      <div class="feature-card"><div class="feature-icon">📊</div><div class="feature-title">Track Progress</div><div class="feature-desc">Your scores are saved so you can see improvement over time.</div></div>
+      <div class="feature-card"><div class="feature-icon">🎯</div><div class="feature-title">3 Difficulty Levels</div><div class="feature-desc">Basic (20Qs), Intermediate (40Qs), Advanced (60Qs).</div></div>
+      <div class="feature-card"><div class="feature-icon">🔁</div><div class="feature-title">Review Mistakes</div><div class="feature-desc">After each quiz, review every wrong answer in detail.</div></div>
+      <div class="feature-card"><div class="feature-icon">⏱️</div><div class="feature-title">Timed Challenges</div><div class="feature-desc">30s · 45s · 60s per question based on difficulty.</div></div>
+      <div class="feature-card"><div class="feature-icon">🌙</div><div class="feature-title">Dark & Light Mode</div><div class="feature-desc">Switch themes anytime. Your preference is remembered.</div></div>
+    </div>
+  </section>
+
+  <section class="landing-techs">
+    <h2 class="techs-title">Choose your technology</h2>
+    <div class="techs-grid">
+      <button class="tech-pill tech-pill-btn" data-tech="html">🌐 HTML</button>
+      <button class="tech-pill tech-pill-btn" data-tech="css">🎨 CSS</button>
+      <button class="tech-pill tech-pill-btn" data-tech="javascript">⚡ JavaScript</button>
+      <button class="tech-pill tech-pill-btn" data-tech="react">⚛️ React</button>
+      <button class="tech-pill tech-pill-btn" data-tech="nodejs">🟢 Node.js</button>
+      <button class="tech-pill tech-pill-btn" data-tech="mongodb">🍃 MongoDB</button>
+      <button class="tech-pill tech-pill-btn" data-tech="java">☕ Java</button>
+      <button class="tech-pill tech-pill-btn" data-tech="python">🐍 Python</button>
+      <button class="tech-pill tech-pill-btn" data-tech="cpp">⚙️ C++</button>
+      <button class="tech-pill tech-pill-btn" data-tech="bootstrap">🅱️ Bootstrap</button>
+    </div>
+  </section>
+
+  <section class="landing-cta">
+    <div class="cta-box">
+      <div class="feature-icon">🏆</div>
+      <h2 class="cta-title">Ready to test yourself?</h2>
+      <p class="cta-desc">Pick any technology, choose your difficulty, and see how much you really know. Questions shuffle every time.</p>
+      <button class="btn-hero-primary" id="ctaStartBtn">Start Quizzing Now →</button>
+    </div>
+  </section>
+
+</div>
+
+
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<!-- MAIN APP                                                           -->
+<!-- ══════════════════════════════════════════════════════════════════ -->
+<div id="appContainer" class="hidden">
+
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
       <div class="logo-icon">⟨/⟩</div>
       <div>
         <h1 class="logo-title">Tech Quiz<br>Master</h1>
-        <p class="logo-sub">Level up your skills</p>
+        <p class="logo-sub" id="sidebarUsername">Level up your skills</p>
       </div>
-      <!-- ADD THIS BUTTON -->
-       <button class="theme-toggle" id="themeToggle" title="Toggle theme">🌙</button>
+      <button class="theme-toggle" id="themeToggle" title="Toggle theme">🌙</button>
     </div>
 
-    <nav class="tech-list" id="techList">
-      <!-- Populated by JS -->
-    </nav>
+    <button class="back-home-btn" id="backHomeBtn">← Back to Home</button>
+
+    <nav class="tech-list" id="techList"></nav>
 
     <div class="sidebar-footer">
       <span>Master your skills one quiz at a time.</span>
       <strong>Keep Learning, Keep Growing!</strong>
+      <button class="btn-logout" id="logoutBtnSidebar" style="margin-top:10px;width:100%;padding:8px">Sign Out</button>
     </div>
   </aside>
 
-  <!-- ── MAIN CONTENT ── -->
   <main class="main" id="mainContent">
 
-    <!-- HOME VIEW -->
     <section class="view" id="homeView">
       <div class="home-card">
         <div class="home-icon" id="homeIcon">{ }</div>
         <h2 class="home-title" id="homeTechName">Select a Technology</h2>
         <p class="home-desc" id="homeDesc">Choose a technology from the sidebar to begin your challenge</p>
-        <div class="difficulty-grid" id="difficultyGrid">
-          <!-- Populated dynamically -->
-        </div>
+        <div class="difficulty-grid" id="difficultyGrid"></div>
         <p class="home-hint" id="homeHint">← Pick a topic to get started</p>
       </div>
     </section>
 
-    <!-- QUIZ VIEW -->
     <section class="view hidden" id="quizView">
       <div class="quiz-header">
         <div class="quiz-meta">
@@ -73,22 +243,17 @@
           <strong id="liveScore">0</strong>
         </div>
       </div>
-
       <div class="question-card" id="questionCard">
         <p class="question-number" id="questionNumber">Question 1</p>
         <h2 class="question-text" id="questionText">Loading question...</h2>
-        <div class="options-grid" id="optionsGrid">
-          <!-- Populated by JS -->
-        </div>
+        <div class="options-grid" id="optionsGrid"></div>
       </div>
-
       <div class="quiz-controls">
         <button class="btn btn-ghost" id="quitBtn">✕ Quit</button>
         <button class="btn btn-primary hidden" id="nextBtn">Next →</button>
       </div>
     </section>
 
-    <!-- RESULTS VIEW -->
     <section class="view hidden" id="resultsView">
       <div class="results-card">
         <div class="result-icon" id="resultIcon">🏆</div>
@@ -111,16 +276,26 @@
         </div>
         <div class="result-actions">
           <button class="btn btn-ghost" id="retryBtn">↺ Retry</button>
+          <button class="btn btn-secondary" id="reviewBtn">📖 Review</button>
           <button class="btn btn-primary" id="homeBtn">⌂ Home</button>
         </div>
       </div>
     </section>
 
-  </main>
+    <section class="view hidden" id="reviewView">
+      <div class="review-header">
+        <h2 class="review-title">📖 Review Wrong Answers</h2>
+        <button class="btn btn-ghost" id="reviewBackBtn">← Back to Results</button>
+      </div>
+      <div id="reviewList"></div>
+    </section>
 
-  <!-- ── FIREBASE SDKs ── -->
-  <script type="module" src="js/firebase-config.js"></script>
-  <script type="module" src="js/questions.js"></script>
-  <script type="module" src="js/app.js"></script>
+  </main>
+</div>
+
+<script type="module" src="js/firebase-config.js"></script>
+<script type="module" src="js/questions.js"></script>
+<script type="module" src="js/auth.js"></script>
+<script type="module" src="js/app.js"></script>
 </body>
 </html>
