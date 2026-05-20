@@ -151,7 +151,8 @@ async function logout() {
 }
 
 if (logoutBtnLanding) logoutBtnLanding.addEventListener("click", logout);
-if (logoutBtnSidebar) logoutBtnSidebar.addEventListener("click", logout);
+document.getElementById("logoutBtnLanding2") && 
+  document.getElementById("logoutBtnLanding2").addEventListener("click", logout);
 
 // ── NAVIGATION ────────────────────────────────────────────────────────────────
 if (startQuizBtn)  startQuizBtn.addEventListener("click",  showApp);

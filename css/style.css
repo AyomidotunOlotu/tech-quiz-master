@@ -737,3 +737,159 @@ body.light .opt-letter {
   .quiz-header  { gap: 8px; }
   .quiz-tech-badge, .quiz-diff-badge { font-size: 11px; padding: 4px 9px; }
 }
+/* ── SIDEBAR LOGO HOME BUTTON ───────────────── */
+.sidebar-logo-home {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 10px 12px;
+  padding: 10px 14px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all .2s;
+}
+.sidebar-logo-home:hover {
+  border-color: var(--accent);
+  background: rgba(249,115,22,.08);
+}
+.sidebar-logo-home .logo-icon {
+  width: 34px;
+  height: 34px;
+  font-size: 12px;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+.sidebar-home-text span {
+  display: block;
+  font-size: 9px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+.sidebar-home-text strong {
+  display: block;
+  font-size: 13px;
+  font-family: var(--font-head);
+  color: var(--text);
+  font-weight: 700;
+  margin-top: 1px;
+}
+.home-arrow {
+  margin-left: auto;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+.sidebar-logo-home:hover .home-arrow { color: var(--accent); }
+
+/* ── MOBILE NAV FIX ─────────────────────────── */
+@media (max-width: 768px) {
+
+  /* Landing nav — stack on mobile */
+  .landing-nav {
+    padding: 12px 16px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .landing-nav-actions {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .nav-user-info {
+    flex: 1;
+  }
+
+  .nav-username {
+    font-size: 12px;
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .btn-logout {
+    padding: 7px 12px;
+    font-size: 11px;
+    flex-shrink: 0;
+  }
+
+  .btn-start-quiz {
+    padding: 8px 14px;
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+
+  .nav-avatar {
+    width: 30px;
+    height: 30px;
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+
+  /* Fix quiz layout shift */
+  .question-card {
+    min-height: 420px;
+  }
+
+  .options-grid {
+    grid-template-columns: 1fr;
+    min-height: 280px;
+  }
+
+  .option-btn {
+    min-height: 56px;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Hero stats — 2x2 grid on mobile */
+  .hero-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 36px;
+  }
+
+  /* Features grid — 1 col on small mobile */
+  .features-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Tech pills wrap nicely */
+  .techs-grid {
+    gap: 8px;
+  }
+
+  .tech-pill {
+    font-size: 12px;
+    padding: 8px 14px;
+  }
+}
+
+/* ── QUIZ LAYOUT STABILITY ──────────────────── */
+.question-card {
+  min-height: 380px;
+  display: flex;
+  flex-direction: column;
+}
+
+.options-grid {
+  flex: 1;
+}
+
+.option-btn {
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+}
+
+/* Prevent layout shift on progress updates */
+.quiz-header {
+  min-height: 48px;
+}
