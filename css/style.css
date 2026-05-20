@@ -894,13 +894,30 @@ body.light .opt-letter {
   min-height: 48px;
 }
 /* ── CENTER QUIZ CONTENT ─────────────────────── */
+/* ── CENTER QUIZ CONTENT ─────────────────────── */
 .main {
+  margin-left: var(--sidebar-w);
   flex: 1;
+  min-height: 100vh;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   padding: 40px 32px;
+  background:
+    radial-gradient(ellipse 60% 50% at 70% 20%, rgba(249,115,22,.06) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 40% at 20% 80%, rgba(59,130,246,.05) 0%, transparent 70%),
+    var(--bg);
+}
+
+.view {
   width: 100%;
+  max-width: 680px;
+}
+
+#appContainer {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
 }
 
 .view {
