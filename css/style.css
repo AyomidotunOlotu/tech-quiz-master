@@ -893,3 +893,28 @@ body.light .opt-letter {
 .quiz-header {
   min-height: 48px;
 }
+/* ── CENTER QUIZ CONTENT ─────────────────────── */
+.main {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 40px 32px;
+  width: 100%;
+}
+
+.view {
+  width: 100%;
+  max-width: 720px;
+}
+
+/* Keep quiz card from being too wide */
+.question-card {
+  width: 100%;
+}
+
+/* Center the quit/next buttons row */
+.quiz-controls {
+  max-width: 720px;
+  width: 100%;
+}
