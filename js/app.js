@@ -199,7 +199,13 @@ function renderQuestion() {
 
 window.selectAnswer = function(idx) {
   if (state.answered) return;
+
   state.answered = true;
+
+  // SAFETY FIX
+  if (!state.wrongAnswers) {
+    state.wrongAnswers = [];
+  }
 
   const q = state.questions[state.current];
   const btns = $("optionsGrid").querySelectorAll(".option-btn");
@@ -209,21 +215,28 @@ window.selectAnswer = function(idx) {
   if (idx === q.answer) {
     state.score++;
     $("liveScore").textContent = state.score;
+
     btns[idx].classList.add("correct");
     btns[idx].classList.add("pop");
+
   } else {
+
     btns[idx].classList.add("wrong");
     btns[idx].classList.add("shake");
+
     btns[q.answer].classList.add("correct");
-    // ← ADD THESE 5 LINES
+
     state.wrongAnswers.push({
-      question:      q.text,
-      yourAnswer:    q.options[idx],
+      question: q.text,
+      yourAnswer: q.options[idx],
       correctAnswer: q.options[q.answer],
     });
   }
+
+  // SHOW NEXT BUTTON
   $("nextBtn").classList.remove("hidden");
 
+  // LAST QUESTION?
   if (state.current === state.questions.length - 1) {
     $("nextBtn").textContent = "Finish ✓";
   } else {
