@@ -195,8 +195,6 @@ function renderQuestion() {
 
 
 
-  $("nextBtn").classList.remove("hidden");
-
   // ── ANSWER SELECTION ──────────────────────────────────────────────────────────
 
 window.selectAnswer = function(idx) {
@@ -349,7 +347,9 @@ async function saveResult(data) {
 
 // ── VIEW HELPERS ──────────────────────────────────────────────────────────────
 function showView(el) {
-  [homeView, quizView, resultsView].forEach(v => v.classList.add("hidden"));
+  [homeView, quizView, resultsView, $("reviewView")]
+    .forEach(v => v.classList.add("hidden"));
+
   el.classList.remove("hidden");
 }
 
