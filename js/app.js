@@ -15,6 +15,8 @@ let state = {
   answered:     false,
   startTime:    null,
   elapsed:      0,
+  wrongAnswers: [],    // ← make sure this is here
+  timerInterval: null,
 };
 
 // ── ELEMENTS ──────────────────────────────────────────────────────────────────
@@ -191,7 +193,12 @@ function renderQuestion() {
   });
 }
 
-// ── ANSWER SELECTION ──────────────────────────────────────────────────────────
+
+
+  $("nextBtn").classList.remove("hidden");
+
+  // ── ANSWER SELECTION ──────────────────────────────────────────────────────────
+
 window.selectAnswer = function(idx) {
   if (state.answered) return;
   state.answered = true;
@@ -210,11 +217,15 @@ window.selectAnswer = function(idx) {
     btns[idx].classList.add("wrong");
     btns[idx].classList.add("shake");
     btns[q.answer].classList.add("correct");
+    // ← ADD THESE 5 LINES
+    state.wrongAnswers.push({
+      question:      q.text,
+      yourAnswer:    q.options[idx],
+      correctAnswer: q.options[q.answer],
+    });
   }
-
   $("nextBtn").classList.remove("hidden");
 
-  // Auto advance after delay on last question
   if (state.current === state.questions.length - 1) {
     $("nextBtn").textContent = "Finish ✓";
   } else {
@@ -222,6 +233,30 @@ window.selectAnswer = function(idx) {
   }
 };
 
+// ── REVIEW WRONG ANSWERS ─────────────────────────────────────────────────────
+function showReview() {
+  if (!state.wrongAnswers || state.wrongAnswers.length === 0) {
+    alert("🎉 Perfect score! No wrong answers to review.");
+    return;
+  }
+
+  const list = $("reviewList");
+  list.innerHTML = state.wrongAnswers.map((w, i) => `
+    <div class="review-card">
+      <p class="review-num">Question ${i + 1}</p>
+      <p class="review-question">${escapeHtml(w.question)}</p>
+      <div class="review-answers">
+        <div class="review-wrong">
+          ✗ Your answer: <span>${escapeHtml(w.yourAnswer)}</span>
+        </div>
+        <div class="review-correct">
+          ✓ Correct: <span>${escapeHtml(w.correctAnswer)}</span>
+        </div>
+      </div>
+    </div>`).join("");
+
+  showView($("reviewView"));
+}
 // ── CONTROLS ─────────────────────────────────────────────────────────────────
 function attachControls() {
   $("nextBtn").addEventListener("click", () => {
@@ -248,6 +283,9 @@ function attachControls() {
     document.getElementById("appContainer").classList.remove("hidden");
     document.getElementById("landingOverlay").classList.add("hidden");
   });
+  // ← ADD THESE TWO LINES
+  $("reviewBtn").addEventListener("click", showReview);
+  $("reviewBackBtn").addEventListener("click", () => showView(resultsView));
 }
 
 // ── RESULTS ────────────────────────────────────────────────────────────────────
